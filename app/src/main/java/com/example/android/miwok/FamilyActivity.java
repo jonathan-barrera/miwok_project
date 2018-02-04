@@ -1,10 +1,14 @@
 package com.example.android.miwok;
 
+import android.app.Activity;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,13 +18,15 @@ import java.util.ArrayList;
 
 public class FamilyActivity extends AppCompatActivity {
 
+    private MediaPlayer mMediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
 
         // Create an array list to contain all of the vocab words for numbers.
-        ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<Word>();
 
         // Add each number vocab word and its miwok translation
         words.add(new Word("father", "әpә", R.raw.family_father, R.drawable.family_father));
@@ -39,6 +45,14 @@ public class FamilyActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
 
         listView.setAdapter(itemsAdapter);
-        //listView.setBackgroundColor(Color.parseColor("#379237"));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Word word = words.get(position);
+                mMediaPlayer = MediaPlayer.create(FamilyActivity.this, word.getAudioResourceId());
+                mMediaPlayer.start();
+            }
+        });
     }
 }

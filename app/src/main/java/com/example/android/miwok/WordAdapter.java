@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Created by jonathanbarrera on 1/31/18.
@@ -77,7 +78,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         listItemView.setBackgroundColor(mColorResourceId);
 
-        // Set a click listener on that View
+        /**
+// Set a click listener on that View
         textContainer.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the colors View is clicked on.
             @Override
@@ -87,6 +89,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
                 mediaPlayer.start();
             }
         });
+            */
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView and a media player)
         // so that it can be shown in the ListView

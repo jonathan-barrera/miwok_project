@@ -1,15 +1,19 @@
 package com.example.android.miwok;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
+
+    private MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +22,7 @@ public class NumbersActivity extends AppCompatActivity {
 
         // Create an array list to contain all of the vocab words for numbers.
 
-        ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<Word>();
 
         // Add each number vocab word and its miwok translation
         words.add(new Word("one", "lutti", R.raw.number_one, R.drawable.number_one));
@@ -37,6 +41,15 @@ public class NumbersActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
 
         listView.setAdapter(itemsAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Word word = words.get(position);
+                mMediaPlayer = MediaPlayer.create(NumbersActivity.this, word.getAudioResourceId());
+                mMediaPlayer.start();
+            }
+        });
 
     }
 }
