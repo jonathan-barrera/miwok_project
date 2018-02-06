@@ -28,7 +28,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
     // Resource ID for the background color for the list of words.
     private int mColorResourceId;
-    private MediaPlayer mediaPlayer;
+
+    //private MediaPlayer mediaPlayer;
 
     public WordAdapter(Activity context, ArrayList<Word> words, int colorResourceId) {
         super(context, 0, words);
@@ -75,6 +76,11 @@ public class WordAdapter extends ArrayAdapter<Word> {
         View textContainer = listItemView.findViewById(R.id.text_container);
         int color = ContextCompat.getColor(getContext(), mColorResourceId);
         textContainer.setBackgroundColor(color);
+
+        // Set the background color for the play button
+        View playButton = listItemView.findViewById(R.id.play_button);
+        playButton.setBackgroundColor(color);
+
 
         listItemView.setBackgroundColor(mColorResourceId);
 
